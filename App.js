@@ -4,20 +4,12 @@ import {createStackNavigator} from 'react-navigation';
 import SelectLanguage from './app/screens/SelectLanguage';
 import LoginScreen from './app/screens/LoginScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
-//import Dashboard from './react_app/Dashboard';
+import Dashboard from './app/screens/Dashboard';
 //import HeaderTransparent from './react_app/HeaderTransparent';
 //import TabsHome from './react_app/TabsHome';
 
 
 const mainNavigator = createStackNavigator({
-//    Dashboard:{
-//        screen:Dashboard,
-//         navigationOptions:{
-//                    header:null,
-//                }
-//      },
-
-
 
     SelectLanguage :{
         screen: SelectLanguage,
@@ -39,6 +31,14 @@ const mainNavigator = createStackNavigator({
             header:null
         }
       },
+      Dashboard:{
+        screen:Dashboard,
+         navigationOptions:{
+                    header:null,
+                }
+      },
+
+
 
 //
 //
