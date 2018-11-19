@@ -132,8 +132,8 @@ export default StyleSheet.create({
 
              card_style: {
                 position: 'absolute',
-                top: 40,
-                left: 40,
+                top: 80,
+                left: 0,
                 backgroundColor: 'red'
               },
 

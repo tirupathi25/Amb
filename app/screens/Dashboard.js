@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import {Image, ScrollView, View, Text, StatusBar, AsyncStorage, ToastAndroid, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {Image, ScrollView, View, Text, StatusBar, AsyncStorage,
+ ToastAndroid, TouchableHighlight, TouchableOpacity} from 'react-native';
 //import getTheme from '../native-base-theme/components';
 //import material from '../native-base-theme/variables/material';
 
@@ -9,7 +10,7 @@ const T = Constants.COLOR;
 
 //import HeaderGlobal from './HeaderGlobal';
 import styles from '../styles/GlobalStyles';
-import {Card, Avatar, Header, ButtonGroup} from 'react-native-elements';
+import {Card, Avatar, Header, ButtonGroup, Divider, SocialIcon } from 'react-native-elements';
 
 import Icon from "../components/Icon";
 
@@ -32,6 +33,10 @@ export default class Dashboard extends Component {
             user_id:'',
               name: 'Hi',
                showAlert: false,
+               progress:true,
+               msg:null,
+               title:null,
+               confirmButtonVisibility:true,
         }
 
    AsyncStorage.getItem("user_id").then((value) => {
@@ -100,7 +105,7 @@ logout = ()=>{
 
 
     serverCallLogout(headerss, url){
-
+            this.setState({msg:null, title:null, confirmButtonVisibility:false, progress:true});
           var device_id = DeviceInfo.getUniqueID();
           var device_type = DeviceInfo.getSystemName();
           const{user_id} = this.state;
@@ -132,15 +137,27 @@ logout = ()=>{
     selectButton = () => {
     };
 
-//
-//    const component1 = () => <Text>Hello</Text>
-//    const component2 = () => <Text>World</Text>
-//    const component3 = () => <Text>ButtonGroup</Text>
+    clickItem = (icon_name) => {
+        switch(icon_name){
+            case 'cart':
+                this.props.navigation.navigate('RegularOrderScreen', null );
+                break;
+             case 'disc':
+                 this.showUrgentOrderAlert();
+                break;
+        }
+    };
+
+    showUrgentOrderAlert(){
+     this.setState({msg:strings('urgent_order_alert'), showAlert:true, progress:false, title:"Alert", confirmButtonVisibility:true});
+     this._showAlert();
+    }
+
 
  _renderItem = (data, i) => (
 
         <TouchableOpacity  style={[{ backgroundColor: data.color, alignItems:'center', justifyContent:'center' }, styles.item]} key={i}
-        onPress={()=> this.props.navigation.navigate('RegularOrderScreen', null )}>
+        onPress={()=>this.clickItem(data.icon_name) }>
             <Icon
                 name= {data.icon_name}
                 color='#fff'
@@ -149,32 +166,32 @@ logout = ()=>{
                 size={30}
                 style={{marginRight:5}}
               />
-              <Text style={{  fontSize:18, color:'#fff', textAlign:'center' }} > {data.text_name} </Text>
+              <Text style={{  fontSize:16, color:'#fff', textAlign:'center' }} > {data.text_name} </Text>
         </TouchableOpacity>
 
      );
 
+      _renderSocialItem = (data, i) => (
+
+             <TouchableOpacity  style={[{ backgroundColor: data.color, alignItems:'center', justifyContent:'center' }, styles.item]} key={i}
+             onPress={()=> this.props.navigation.navigate('', null )}>
+                 <SocialIcon
+                     type= {data.icon_name}
+                     color='#fff'
+                     onPress={() => this.logout}
+                     underlayColor={'#64b5f6'}
+                     size={30}
+                     style={{marginRight:5}}
+                   />
+                   <Text style={{  fontSize:16, color:'#fff', textAlign:'center' }} > {data.text_name} </Text>
+             </TouchableOpacity>
+
+          );
+
+
   render() {
 
 
-//  const users = [
-//           {
-//              name: 'brynn',
-//              avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-//           },
-//           {
-//                 name: 'brynn',
-//                 avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-//              },
-//          {
-//                    name: 'brynn',
-//                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-//                 },
-//             {
-//                   name: 'brynn',
-//                   avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-//                },
-//          ]
 
             const buttons = ['Mutsoko Suziki', 'Gold Member', 'Ambica'];
 
@@ -225,33 +242,56 @@ logout = ()=>{
                 containerStyle={{height: 40}}
                 style={{borderColor:'red', borderWidth:4, borderRadius:5, backgroundColor:'red'}}/>
 
+            <ScrollView  contentContainerStyle={{ flexGrow:1 }}>
+                <View style={{flex:1, backgroundColor:'#fff', justifyContent:'center'}}>
+                   <Grid
+                     style={{flex:1}}
+                     renderItem={this._renderItem}
+                     renderPlaceholder={this._renderPlaceholder}
+    //                 data={[{'color':'#E91D62'}, 'orange', 'red', 'green', 'blue', 'yellow', 'skyblue', 'grey']}
+                     data={[{'color':'#E91D62', 'icon_name':'cart', 'text_name':strings('regular_order.one')},
+                      {'color':'#9C2881', 'icon_name':'disc', 'text_name':strings('regular_order.two')},
+                       {'color':'#2196F3', 'icon_name':'document', 'text_name':strings('regular_order.three')},
+                     {'color':'#02BD14', 'icon_name':'alert', 'text_name':strings('regular_order.four')},
+                      {'color':'#FEC107', 'icon_name':'microphone', 'text_name':strings('regular_order.five')},
+                      {'color':'#9E9E9E', 'icon_name':'aperture', 'text_name':strings('regular_order.six')},
+                        {'color':'#1B4FA8', 'icon_name':'list-box', 'text_name':strings('regular_order.seven')},
+                         {'color':'#46E855', 'icon_name':'megaphone', 'text_name':strings('regular_order.eight')},
+                         {'color':'#F44337', 'icon_name':'alarm', 'text_name':strings('regular_order.nine')}]}
+                     itemsPerRow={2}
+                   />
 
-            <View style={{flex:1, backgroundColor:'#fff', justifyContent:'center'}}>
-               <Grid
-                 style={{flex:1}}
-                 renderItem={this._renderItem}
-                 renderPlaceholder={this._renderPlaceholder}
-//                 data={[{'color':'#E91D62'}, 'orange', 'red', 'green', 'blue', 'yellow', 'skyblue', 'grey']}
-                 data={[{'color':'#E91D62', 'icon_name':'cart', 'text_name':strings('regular_order.one')},
-                  {'color':'#9C2881', 'icon_name':'disc', 'text_name':strings('regular_order.two')},
-                   {'color':'#2916F3', 'icon_name':'document', 'text_name':strings('regular_order.three')},
-                 {'color':'#02BD14', 'icon_name':'alert', 'text_name':strings('regular_order.four')},
-                  {'color':'#FEC107', 'icon_name':'microphone', 'text_name':strings('regular_order.five')},
-                  {'color':'#9E9E9E', 'icon_name':'aperture', 'text_name':strings('regular_order.six')},
-                    {'color':'#1B4FA8', 'icon_name':'list-box', 'text_name':strings('regular_order.seven')},
-                     {'color':'#46E855', 'icon_name':'megaphone', 'text_name':strings('regular_order.eight')},
-                     {'color':'#F44337', 'icon_name':'alarm', 'text_name':strings('regular_order.nine')}]}
-                 itemsPerRow={2}
-               />
-            </View>
+                    <View style={{marginTop:10}}>
+                        <View style ={styles.seperator}/>
+                        <Text style={{fontSize:20, margin:10, color:'black'}}>{strings('social_network')}</Text>
+                         <Grid
+                             style={{flex:1}}
+                             renderItem={this._renderSocialItem}
+                             renderPlaceholder={this._renderPlaceholder}
+            //                 data={[{'color':'#E91D62'}, 'orange', 'red', 'green', 'blue', 'yellow', 'skyblue', 'grey']}
+                             data={[{'color':'#3B5998', 'icon_name':'facebook', 'text_name':strings('social.facebook')},
+                              {'color':'#395976', 'icon_name':'tumblr', 'text_name':strings('social.tumblr')},
+                               {'color':'#6A453B', 'icon_name':'instagram', 'text_name':strings('social.instagram')},
+                             {'color':'#C4302B', 'icon_name':'youtube', 'text_name':strings('social.youtube')}]}
+                             itemsPerRow={2}
+                           />
 
+                   </View>
+                </View>
+              </ScrollView>
 
             <AwesomeAlert
                   show={this.state.showAlert}
-                  showProgress={true}
+                  showProgress={this.state.progress}
+                  message={this.state.msg}
                   closeOnTouchOutside={false}
                   closeOnHardwareBackPress={false}
-
+                  title={this.state.title}
+                  showConfirmButton={this.state.confirmButtonVisibility}
+                  confirmText="ok"
+                  onConfirmPressed={() => {
+                          this._hideAlert();
+                        }}
                 />
 
         </View>

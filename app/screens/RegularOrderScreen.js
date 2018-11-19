@@ -3,13 +3,17 @@ import {Image, ScrollView, View, Text, StatusBar, AsyncStorage, ToastAndroid, To
  TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
 import styles from '../styles/GlobalStyles';
 import AwesomeAlert from 'react-native-awesome-alerts';
-
-
+import { Icon, CheckBox, FormLabel, FormInput, FormValidationMessage, ListItem} from 'react-native-elements';
 const OAuth = require('oauth-1.0a');
 const Crypto = require('../../crypto');
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
 import {ServiceHeader} from '../utils/ServiceHeaders';
+const Constants = require('../styles/ColorConstants');
+const T = Constants.COLOR;
+
+import {InputGroup, Input, Item, Label} from 'native-base';
+//import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class RegularOrderScreen extends Component {
 
@@ -33,6 +37,17 @@ export default class RegularOrderScreen extends Component {
 
     }
 
+    static navigationOptions = {
+        title: 'Back',
+        headerStyle: {
+          backgroundColor:'#FEC107',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      };
+
   _showAlert = () => {
             this.setState({
               showAlert: true
@@ -51,12 +66,12 @@ export default class RegularOrderScreen extends Component {
 //                    var device_type = DeviceInfo.getSystemName();
                     const{user_id} = this.state;
 
-//                    this._showAlert();
+                    this._showAlert();
                     axios.get(url, { headers:headerss})
                     .then((res)=>{
                             this.offset = this.offset + 1;
-//                          this._hideAlert();
-
+                          this.getItems();
+//                            alert(JSON.stringify(res.data.data));
                           this.setState({
                                      serverData: [...this.state.serverData, ...res.data.data],
                                     loading: false,
@@ -64,7 +79,7 @@ export default class RegularOrderScreen extends Component {
                        }
                      )
                      .catch((error)=>{
-//                         this._hideAlert();
+                         this._hideAlert();
                          alert('Err: '+JSON.stringify(error.response.data));
                      });
               }
@@ -118,25 +133,52 @@ export default class RegularOrderScreen extends Component {
                 <View style={{flex: 1,
                                      justifyContent: 'center',
                                      alignItems:'center',
-                                     paddingTop: 30, backgroundColor:'#FEC107'}}>
+                                     backgroundColor:'#fff'}}>
+
+                 <StatusBar backgroundColor= {T.YELLOW} barStyle="light-content"/>
+
+                 <View style={{backgroundColor:T.YELLOW, flex:1,  width:'100%', padding:15}}>
+                    <Item  >
+                    <Label style={{color:'#fff', fontSize:22}}>Search...</Label>
+                            <Input style={{marginBottom:5, color:'white'}}
+                                   value={''}
+                                   onChangeText={(text) => this.onPasswordChange(text)}
+
+                            />
+                          </Item>
+                 </View>
+
+                <View style={[styles.card_style, {flex:3, width:'100%', backgroundColor:'#fff'}]}>
 
 
-                            {this.state.loading ? (<ActivityIndicator size="large" />) : (
-                                        <FlatList style={{ flex:1,width:'90%', backgroundColor:'#fff', borderRadius:10,
-                                        marginLeft:20, marginRight:20, marginTop:20}}
+                        <FlatList style={{ flex:1,width:'90%', backgroundColor:'#fff', borderRadius:10,
+                        marginLeft:20, marginRight:20, marginTop:20}}
 
-                                        keyExtractor={(item, index) => index}
-                                        data = {this.state.serverData}
-                                        renderItem={({ item, index}) => (
-                                            <View style={{padding:10}}>
-                                            <Text style={{ fontSize: 15, color: 'black',}}>
-                                            {item.values.displayname}</Text>
-                                            </View>
-                                        )}
-                                        ListFooterComponent={this.renderFooter.bind(this)}
-                                        ItemSeparatorComponent={() => <View style={styles.seperator}/>}
-                                        />
-                                    )}
+                        keyExtractor={(item, index) => index}
+                        data = {this.state.serverData}
+                        renderItem={({ item, index}) => (
+                            <View style={{padding:1}}>
+                              <ListItem
+                                  title={item.values.displayname}
+                                  subtitle={item.values.baseprice}
+                                  leftAvatar={{ source: { uri: item.values.imageurl===''?
+                                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg':item.values.imageurl } }}
+                                />
+                            </View>
+                        )}
+                        ListFooterComponent={this.renderFooter.bind(this)}
+                        />
+
+                     <AwesomeAlert
+                          show={this.state.showAlert}
+                          showProgress={true}
+                          closeOnTouchOutside={false}
+                          closeOnHardwareBackPress={false}
+                        />
+
+                </View>
+
+
 
                 </View>
 
@@ -144,10 +186,9 @@ export default class RegularOrderScreen extends Component {
         }
 }
 
-//    <AwesomeAlert
-//                              show={this.state.showAlert}
-//                              showProgress={true}
-//                              closeOnTouchOutside={false}
-//                              closeOnHardwareBackPress={false}
-//
-//                            />
+//   <InputGroup style={{flex:1, color:'white', margin:10}} borderType="underline" >
+//                    <Icon name={'search'} size={27} color={'white'}/>
+//                    <Input placeholder="Search" style={{color:'#fff'}}/>
+//                </InputGroup>
+
+

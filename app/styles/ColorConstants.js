@@ -8,7 +8,9 @@ module.exports = {
     DARKGRAY: '#999',
     BLUE: '#03a9f4',
     GREEN:'#4caf50',
-    YELLOW:'#f9a825',
+//    YELLOW:'#f9a825',
+     YELLOW:'#FEC107',
+
     RED:'#d32f2f',
     TRANSPARENT:'transparent',
   },

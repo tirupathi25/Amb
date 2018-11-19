@@ -5,6 +5,7 @@ import {View, StatusBar, Image, TouchableNativeFeedback, StyleSheet, TouchableHi
  ToastAndroid} from 'react-native';
 //import {Accordionm, Button, Text} from 'native-base';
 import styles from '../styles/GlobalStyles';
+import {ListItem, Left, Right} from 'native-base';
 
 const Constants = require('../styles/ColorConstants');
 const T = Constants.COLOR;
@@ -68,6 +69,16 @@ export default class WelcomeScreen extends Component {
                                 <Text style={{color:'white', textAlign:'center', fontSize:24,}}
                                 onPress={() => this.pressWelcome()}>{strings('welcome')}</Text>
                             </View>
+
+
+            <ListItem>
+              <Left>
+                <Text style={{color:'white'}}>{'(c)Ambica Trading Co'}</Text>
+              </Left>
+              <Right>
+                  <Text  style={{color:'white'}}>{'V 1.23.456'}</Text>
+              </Right>
+            </ListItem>
 
                     </View>
             </ImageBackground>

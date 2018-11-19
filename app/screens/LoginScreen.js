@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Item, Input, Label, ListItem, Body } from 'native-base';
+import { Form, Item, Input, Label, ListItem, Body, Left, Right } from 'native-base';
 //import getTheme from '../native-base-theme/components';
 //import material from '../native-base-theme/variables/material';
 import {View, StatusBar, Image, TouchableNativeFeedback, StyleSheet, TouchableHighlight,
  ImageBackground, Text, AsyncStorage,
  ToastAndroid, ScrollView, Dimensions} from 'react-native';
 import { Icon, CheckBox, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
+
 import styles from '../styles/GlobalStyles';
 const Constants = require('../styles/ColorConstants');
 const T = Constants.COLOR;
@@ -207,6 +208,7 @@ ambika_login_logo
             </ImageBackground>
 
              <ScrollView  contentContainerStyle={{ flexGrow:1 }}>
+             <View style={{flex:1}}>
                  <View style={{flex:1, margin:20}}>
 
                         <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
@@ -255,7 +257,7 @@ ambika_login_logo
                         </View>
 
                         <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
-                               <Text style={{color:'white', marginBottom:25, fontSize:16}}>Forgot Password</Text>
+                               <Text style={{color:'white', marginBottom:25, marginTop:10, fontSize:16}}>Forgot Password</Text>
                                <Text style={{color:'white', marginBottom:10, fontSize:16}}>Dont have an account?</Text>
                                <Text style={styles.text_style_green_20}>Register/ Call AMBIKA</Text>
                         </View>
@@ -265,10 +267,17 @@ ambika_login_logo
                               showProgress={true}
                               closeOnTouchOutside={false}
                               closeOnHardwareBackPress={false}
-
                             />
                     </View>
-
+                     <ListItem>
+                          <Left>
+                            <Text style={{color:'white'}}>{'(c)Ambica Trading Co'}</Text>
+                          </Left>
+                          <Right>
+                              <Text  style={{color:'white'}}>{'V 1.23.456'}</Text>
+                          </Right>
+                    </ListItem>
+                  </View>
             </ScrollView>
        </View>
     );

@@ -13,11 +13,15 @@
     "dashboard": "Dashboard"
 
   },
-
+  "social":{
+    "facebook":"facebook",
+    "tumblr":"tumblr",
+    "instagram":"instagram",
+    "youtube":"youtube"
+  },
 
   "welcome":"ようこそ",
-
-
+  "social_network":"ソーシャルネットワーク",
 
   "languages": {
     "english": "English",
@@ -26,6 +30,8 @@
     "japanese" : "中文"
 
   },
+
+
 
   "regular_order":{
     "one": "通常の注文",
@@ -37,6 +43,8 @@
     "seven":"請求書の一覧",
     "eight":"新しいアイテム & プロモーション",
     "nine":"Ambikaに電話する"
-  }
+  },
+
+  "urgent_order_alert": "緊急発注は、午後5時30分から翌営業日9時30分までの間のみ可能です。"
 
 }

@@ -21,8 +21,14 @@
 
   },
 
-  "welcome":"Welcome",
-
+  "welcome":"Welcome!",
+  "social_network":"Social Network",
+  "social":{
+    "facebook":"facebook",
+    "tumblr":"tumblr",
+    "instagram":"instagram",
+    "youtube":"youtube"
+  },
   "regular_order":{
       "one": "Regular Order",
       "two": "Urgent Order",
@@ -33,6 +39,8 @@
       "seven":"List Invoice",
       "eight":"New Items & Promotions",
       "nine":"Call Ambika"
-  }
+  },
+  "urgent_order_alert":"Urgent order can be placed only between 5:30PM and next working day's 9:30AM"
+
 
 }
