@@ -6,6 +6,7 @@ import {View, StatusBar, Image, TouchableNativeFeedback, StyleSheet, TouchableHi
 //import FitImage from 'react-native-fit-image';
 //import {Accordionm, Button, Text} from 'native-base';
 import styles from '../styles/GlobalStyles';
+import { strings, setLanguage } from '../utils/i18n';
 
 const Constants = require('../styles/ColorConstants');
 const T = Constants.COLOR;
@@ -32,7 +33,10 @@ export default class SelectLanguage extends Component {
         }
    }
 
-   SelectLangToGoToLoginScreen = (language_id)=>{
+   SelectLangToGoToLoginScreen = (language_id, lang)=>{
+
+
+     setLanguage(lang);
         this.props.navigation.navigate('LoginScreen', {'lang_id':language_id, changeName: this.changeName});
    }
 
@@ -68,7 +72,6 @@ export default class SelectLanguage extends Component {
                                />
                            </View>
 
-                           { ToastAndroid.show(this.state.name, ToastAndroid.SHORT) }
 
                             <View style={{ flex:1}}>
                                 <Text style={{color:'white', textAlign:'center', fontSize:24}}> Select Language</Text>
@@ -76,20 +79,20 @@ export default class SelectLanguage extends Component {
 
                            <View style={{ flex:4}}>
 
-                              <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(1)} underlayColor={T.TRANSPARENT}>
-                                       <Text style={[styles.inner_container, styles.customFont, { color:T.BLUE}]} >English</Text>
+                              <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(1, 'en')} underlayColor={T.TRANSPARENT}>
+                                       <Text style={[styles.inner_container, styles.customFont, { color:T.BLUE}]} >{strings('languages.english')}</Text>
                               </TouchableHighlight>
 
-                              <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(2)} underlayColor={T.TRANSPARENT}>
-                                     <Text style={[styles.inner_container, styles.customFont, {color:T.GREEN}]} >Hindi</Text>
+                              <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(2, 'hi')} underlayColor={T.TRANSPARENT}>
+                                     <Text style={[styles.inner_container, styles.customFont, {color:T.GREEN}]} >{strings('languages.hindi')}</Text>
                              </TouchableHighlight>
 
-                             <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(3)} underlayColor={T.TRANSPARENT}>
-                                        <Text style={[styles.inner_container, styles.customFont, {color:T.RED}]} >Japanese</Text>
+                             <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(3, 'ja')} underlayColor={T.TRANSPARENT}>
+                                        <Text style={[styles.inner_container, styles.customFont, {color:T.RED}]} >{strings('languages.japanese')}</Text>
                                </TouchableHighlight>
 
-                               <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(4)} underlayColor={T.TRANSPARENT}>
-                                      <Text style={[styles.inner_container, styles.customFont, {color:T.YELLOW}]} >Nepali</Text>
+                               <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(4, 'ne')} underlayColor={T.TRANSPARENT}>
+                                      <Text style={[styles.inner_container, styles.customFont, {color:T.YELLOW}]} >{strings('languages.nepali')}</Text>
                               </TouchableHighlight>
 
                            </View>
@@ -111,3 +114,4 @@ export default class SelectLanguage extends Component {
   }
 }
 
+//                           { ToastAndroid.show(this.state.name, ToastAndroid.SHORT) }

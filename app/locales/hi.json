@@ -1,0 +1,16 @@
+{
+  "login": {
+    "welcome": "{{name}}, ברוך הבא לאפליקציה המתורגמת!",
+    "login_button": "लॉग इन",
+    "signup_button": "साइन अप",
+    "must_enter_email_adrs_msg":"आपको एक ईमेल पता दर्ज करना होगा",
+    "must_enter_pwd_msg": "आपको एक पासवर्ड दर्ज करना होगा",
+    "order_assistance_system": "आदेश सहायता प्रणाली"
+  },
+
+  "user_profile": {
+    "title": "आपकी रूपरेखा"
+  },
+
+  "welcome":"स्वागत हे"
+}

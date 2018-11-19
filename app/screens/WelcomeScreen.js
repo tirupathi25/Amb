@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 //import { Container, Header, Left, Body, Right, Title } from 'native-base';
 import {View, StatusBar, Image, TouchableNativeFeedback, StyleSheet, TouchableHighlight,
- ImageBackground, Text,
+ ImageBackground, Text, Button,
  ToastAndroid} from 'react-native';
 //import {Accordionm, Button, Text} from 'native-base';
 import styles from '../styles/GlobalStyles';
 
 const Constants = require('../styles/ColorConstants');
 const T = Constants.COLOR;
+
+import { strings, setLanguage } from '../utils/i18n';
 
 export default class WelcomeScreen extends Component {
 
@@ -64,16 +66,11 @@ export default class WelcomeScreen extends Component {
 
                             <View style={{ flex:1}}>
                                 <Text style={{color:'white', textAlign:'center', fontSize:24,}}
-                                onPress={() => this.pressWelcome()}>Welcome!!</Text>
+                                onPress={() => this.pressWelcome()}>{strings('welcome')}</Text>
                             </View>
+
                     </View>
             </ImageBackground>
-
-
-
-
-
-
 
       </View>
 
@@ -81,3 +78,4 @@ export default class WelcomeScreen extends Component {
   }
 }
 
+//                            <Button title='Next' onPress={null} style={{justifyContent:'bottom'}}> </Button>

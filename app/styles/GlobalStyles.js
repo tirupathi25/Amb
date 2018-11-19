@@ -10,6 +10,11 @@ export default StyleSheet.create({
         backgroundColor: '#FFFFFF',
       },
 
+      view_center:{
+        justifyContent:'center',
+        alignItems:'center',
+      },
+
         padding_20:{
                 padding: 20,
 
@@ -63,6 +68,12 @@ export default StyleSheet.create({
                    color:T.GREEN,
                 },
 
+                text_style_green_20:{
+                                   fontSize:20,
+                                   textAlign:'center',
+                                   color:T.GREEN,
+                                },
+
     inner_container: {
         flex: 1,
         fontSize: 22,
@@ -71,7 +82,7 @@ export default StyleSheet.create({
     },
 
     customFont: {
-       fontFamily: 'Cedarville-Cursive',
+//       fontFamily: 'Cedarville-Cursive',
        // or fontFamily: 'Tittilium WebBold Italic'
     },
 
@@ -150,5 +161,27 @@ export default StyleSheet.create({
                     },
 
 
+ footer:{
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    loadMoreBtn:{
+        padding: 10,
+        backgroundColor: '#800000',
+        borderRadius: 4,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+ btnText:{
+        color: 'white',
+        fontSize: 15,
+    },
+  seperator:{
+        height: 0.5,
+        backgroundColor: 'rgba(0,0,0,0.4)'
+    },
 
 });

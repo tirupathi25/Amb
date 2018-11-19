@@ -5,11 +5,13 @@ import SelectLanguage from './app/screens/SelectLanguage';
 import LoginScreen from './app/screens/LoginScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import Dashboard from './app/screens/Dashboard';
+import RegularOrderScreen from './app/screens/RegularOrderScreen';
 //import HeaderTransparent from './react_app/HeaderTransparent';
 //import TabsHome from './react_app/TabsHome';
 
 
 const mainNavigator = createStackNavigator({
+
 
     SelectLanguage :{
         screen: SelectLanguage,
@@ -31,14 +33,20 @@ const mainNavigator = createStackNavigator({
             header:null
         }
       },
-      Dashboard:{
+
+ Dashboard:{
         screen:Dashboard,
          navigationOptions:{
                     header:null,
                 }
       },
 
-
+      RegularOrderScreen:{
+        screen:RegularOrderScreen,
+               navigationOptions:{
+                          header:null,
+                      }
+      }
 
 //
 //

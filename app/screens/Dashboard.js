@@ -18,8 +18,9 @@ const Crypto = require('../../crypto');
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { strings, setLanguage } from '../utils/i18n';
 
- import Grid from 'react-native-grid-component';
+import Grid from 'react-native-grid-component';
 
 
 export default class Dashboard extends Component {
@@ -47,7 +48,7 @@ export default class Dashboard extends Component {
 
 logout = ()=>{
 
- const oauth = OAuth({
+                const oauth = OAuth({
                         realm:'4554399',
                         consumer: {
                             key: 'e140d524d4f9f1b9a86d6022efa89c50946c91ff3e08609739e8db90033ae1b2',
@@ -138,17 +139,17 @@ logout = ()=>{
 
  _renderItem = (data, i) => (
 
-        <TouchableOpacity  style={[{ backgroundColor: data, alignItems:'center', justifyContent:'center' }, styles.item]} key={i}
-        onPress={()=> this.props.navigation.navigate('TabsHome', null )}>
+        <TouchableOpacity  style={[{ backgroundColor: data.color, alignItems:'center', justifyContent:'center' }, styles.item]} key={i}
+        onPress={()=> this.props.navigation.navigate('RegularOrderScreen', null )}>
             <Icon
-                name="exit"
+                name= {data.icon_name}
                 color='#fff'
                 onPress={() => this.logout}
                 underlayColor={'#64b5f6'}
                 size={30}
                 style={{marginRight:5}}
               />
-              <Text style={{  fontSize:18, color:'#fff' }} > {data} </Text>
+              <Text style={{  fontSize:18, color:'#fff', textAlign:'center' }} > {data.text_name} </Text>
         </TouchableOpacity>
 
      );
@@ -156,24 +157,24 @@ logout = ()=>{
   render() {
 
 
-  const users = [
-           {
-              name: 'brynn',
-              avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-           },
-           {
-                 name: 'brynn',
-                 avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-              },
-          {
-                    name: 'brynn',
-                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-                 },
-             {
-                   name: 'brynn',
-                   avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-                },
-          ]
+//  const users = [
+//           {
+//              name: 'brynn',
+//              avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+//           },
+//           {
+//                 name: 'brynn',
+//                 avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+//              },
+//          {
+//                    name: 'brynn',
+//                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+//                 },
+//             {
+//                   name: 'brynn',
+//                   avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+//                },
+//          ]
 
             const buttons = ['Mutsoko Suziki', 'Gold Member', 'Ambica'];
 
@@ -230,7 +231,16 @@ logout = ()=>{
                  style={{flex:1}}
                  renderItem={this._renderItem}
                  renderPlaceholder={this._renderPlaceholder}
-                 data={['#E91D62', 'orange', 'red', 'green', 'blue', 'yellow', 'skyblue', 'grey']}
+//                 data={[{'color':'#E91D62'}, 'orange', 'red', 'green', 'blue', 'yellow', 'skyblue', 'grey']}
+                 data={[{'color':'#E91D62', 'icon_name':'cart', 'text_name':strings('regular_order.one')},
+                  {'color':'#9C2881', 'icon_name':'disc', 'text_name':strings('regular_order.two')},
+                   {'color':'#2916F3', 'icon_name':'document', 'text_name':strings('regular_order.three')},
+                 {'color':'#02BD14', 'icon_name':'alert', 'text_name':strings('regular_order.four')},
+                  {'color':'#FEC107', 'icon_name':'microphone', 'text_name':strings('regular_order.five')},
+                  {'color':'#9E9E9E', 'icon_name':'aperture', 'text_name':strings('regular_order.six')},
+                    {'color':'#1B4FA8', 'icon_name':'list-box', 'text_name':strings('regular_order.seven')},
+                     {'color':'#46E855', 'icon_name':'megaphone', 'text_name':strings('regular_order.eight')},
+                     {'color':'#F44337', 'icon_name':'alarm', 'text_name':strings('regular_order.nine')}]}
                  itemsPerRow={2}
                />
             </View>

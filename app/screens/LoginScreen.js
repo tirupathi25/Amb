@@ -195,7 +195,7 @@ export default class LoginScreen extends Component {
     };
 
 
-
+ambika_login_logo
 
   render() {
     return (
@@ -208,6 +208,12 @@ export default class LoginScreen extends Component {
 
              <ScrollView  contentContainerStyle={{ flexGrow:1 }}>
                  <View style={{flex:1, margin:20}}>
+
+                        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                            <Image style={{width: 120, height:120}}
+                              source={require('../../assets/images/ambika_login_logo.png')}
+                            />
+                        </View>
                        <View style={{flex:2, justifyContent:'center'}}>
                             <Text style={styles.text_style_yel_28}>OASYS</Text>
                             <Text style={styles.text_style}>Order Assistance System</Text>
@@ -228,6 +234,7 @@ export default class LoginScreen extends Component {
                                     <Label style={{color:'white', fontSize:20}}>Password</Label>
                                     <Input style={{marginBottom:10, color:'white'}}
                                             value={this.state.password}
+                                             secureTextEntry={true}
                                            onChangeText={(text) => this.onPasswordChange(text)}
                                     />
                                   </Item>
@@ -250,7 +257,7 @@ export default class LoginScreen extends Component {
                         <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
                                <Text style={{color:'white', marginBottom:25, fontSize:16}}>Forgot Password</Text>
                                <Text style={{color:'white', marginBottom:10, fontSize:16}}>Dont have an account?</Text>
-                               <Text style={styles.text_style_green_22}>Register/ Call AMBIKA</Text>
+                               <Text style={styles.text_style_green_20}>Register/ Call AMBIKA</Text>
                         </View>
 
                          <AwesomeAlert

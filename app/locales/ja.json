@@ -1,0 +1,42 @@
+{
+  "login": {
+    "welcome": "Welcome {{name}} to our localized app!",
+    "login_button": "Login",
+    "signup_button": "Sign Up",
+    "must_enter_email_adrs_msg": "You must enter an email address",
+    "must_enter_pwd_msg": "You must enter a password",
+    "order_assistance_system": "Order Assistance System"
+
+  },
+  "user_profile": {
+    "title": "Your Profile",
+    "dashboard": "Dashboard"
+
+  },
+
+
+  "welcome":"ようこそ",
+
+
+
+  "languages": {
+    "english": "English",
+    "hindi" : "हिंदी",
+    "nepali" : "नेपाली",
+    "japanese" : "中文"
+
+  },
+
+  "regular_order":{
+    "one": "通常の注文",
+    "two": "緊急の注文",
+    "three":"注文履歴",
+    "four":"フィードバック",
+    "five":"ニュース＆アップデート",
+    "six":"プレミアムクラブ",
+    "seven":"請求書の一覧",
+    "eight":"新しいアイテム & プロモーション",
+    "nine":"Ambikaに電話する"
+  }
+
+}

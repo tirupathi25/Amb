@@ -1,0 +1,29 @@
+{
+  "login": {
+    "welcome": "Welcome {{name}} to our localized app!",
+    "login_button": "Login",
+    "signup_button": "Sign Up",
+    "must_enter_email_adrs_msg": "You must enter an email address",
+    "must_enter_pwd_msg": "You must enter a password",
+    "order_assistance_system": "Order Assistance System"
+
+  },
+  "user_profile": {
+    "title": "Your Profile",
+    "dashboard": "Dashboard"
+
+  },
+
+
+  "welcome":"स्वागत छ",
+
+
+
+  "languages": {
+    "english": "English",
+    "hindi" : "हिंदी",
+    "nepali" : "नेपाली",
+    "chinese" : "中文"
+
+  }
+}
