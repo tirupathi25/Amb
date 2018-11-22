@@ -140,7 +140,7 @@ logout = ()=>{
     clickItem = (icon_name) => {
         switch(icon_name){
             case 'cart':
-                this.props.navigation.navigate('RegularOrderScreen', null );
+                this.props.navigation.navigate('OrderEntryDetail', null );
                 break;
              case 'disc':
                  this.showUrgentOrderAlert();
