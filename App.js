@@ -13,12 +13,6 @@ import OrderEntryDetails from './app/screens/OrderEnteryDetails';
 
 const mainNavigator = createStackNavigator({
 
-     Dashboard:{
-        screen:Dashboard,
-         navigationOptions:{
-                    header:null,
-                }
-      },
 
     SelectLanguage :{
         screen: SelectLanguage,
@@ -40,6 +34,14 @@ const mainNavigator = createStackNavigator({
             header:null
         }
       },
+
+       Dashboard:{
+          screen:Dashboard,
+           navigationOptions:{
+                      header:null,
+                  }
+        },
+
 
       OrderEntryDetail:{
                 screen: OrderEntryDetails,
