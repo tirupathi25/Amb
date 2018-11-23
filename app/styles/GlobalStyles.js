@@ -218,7 +218,7 @@ export default StyleSheet.create({
         backgroundColor: T.YELLOW,
         color: '#fff',
         fontSize:25,
-        fontFamily:'Tittilium WebBold Italic',
+        fontFamily:'HelveticaNeue',
     },
 
     flatListParent:{
