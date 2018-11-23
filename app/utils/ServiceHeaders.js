@@ -3,7 +3,7 @@ const Crypto = require('../../crypto');
 import DeviceInfo from 'react-native-device-info';
 
 
-export function ServiceHeader(user_id, index) {
+export function ServiceHeader(user_id, index, search_keyword) {
 
 
     const oauth = OAuth({
@@ -30,7 +30,7 @@ export function ServiceHeader(user_id, index) {
 
        const request_data = {
            url: 'https://4554399.restlets.api.sandbox.netsuite.com/app/site/hosting/restlet.nl?script='+SCRIPT_ID+'&deploy='+DEPLOYMENT_ID+
-           '&index='+index+'&customer_id='+user_id,
+           '&index='+index+'&customer_id='+user_id+'&term='+search_keyword,
 //                   +'&device_id='+device_id+"&device_name="+DeviceInfo.getSystemName()
            method: 'GET'
 

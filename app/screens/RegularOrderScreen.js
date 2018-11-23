@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Image, ScrollView, View, Text, StatusBar, AsyncStorage, ToastAndroid, TouchableHighlight,
- TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
+ TouchableOpacity, FlatList, ActivityIndicator, TextInput} from 'react-native';
 import styles from '../styles/GlobalStyles';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import { Icon, CheckBox, FormLabel, FormInput, FormValidationMessage, ListItem} from 'react-native-elements';
+import { CheckBox, FormLabel, FormInput, FormValidationMessage, ListItem} from 'react-native-elements';
 const OAuth = require('oauth-1.0a');
 const Crypto = require('../../crypto');
 import DeviceInfo from 'react-native-device-info';
@@ -12,33 +12,31 @@ import {ServiceHeader} from '../utils/ServiceHeaders';
 const Constants = require('../styles/ColorConstants');
 const T = Constants.COLOR;
 
-import {InputGroup, Input, Item, Label} from 'native-base';
+import {InputGroup, Input, Item, Label, Button, Icon} from 'native-base';
 //import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class RegularOrderScreen extends Component {
-
 
     constructor(props){
         super(props)
         this.state={
             user_id:'',
             showAlert: false,
-            loading: true,
+            loading: false,
             serverData: [],
-            fetching_from_server: true,
+            offset:0,
+            search_keyword:'',
+//            isEmpty:false
         }
-        this.offset = 0;
-
-         AsyncStorage.getItem("user_id").then((value) => {
-                           this.setState({user_id: value});
-                   }).done();
-
-
-
+        AsyncStorage.getItem("user_id").then((value) => {
+               this.setState({user_id: value});
+        }).done();
     }
 
+
+
     static navigationOptions = {
-        title: 'Back',
+        title: '',
         headerStyle: {
           backgroundColor:'#FEC107',
         },
@@ -48,147 +46,187 @@ export default class RegularOrderScreen extends Component {
         },
       };
 
-  _showAlert = () => {
-            this.setState({
-              showAlert: true
-            });
-          };
+    _showAlert = () => {
+        this.setState({
+          showAlert: true
+        });
+    };
 
-          _hideAlert = () => {
-            this.setState({
-              showAlert: false
-            });
-          };
+      _hideAlert = () => {
+        this.setState({
+          showAlert: false
+        });
+      };
 
-           getItems(headerss, url){
 
-//                    var device_id = DeviceInfo.getUniqueID();
-//                    var device_type = DeviceInfo.getSystemName();
-                    const{user_id} = this.state;
 
-                    this._showAlert();
-                    axios.get(url, { headers:headerss})
-                    .then((res)=>{
-                            this.offset = this.offset + 1;
-                          this.getItems();
-//                            alert(JSON.stringify(res.data.data));
-                          this.setState({
-                                     serverData: [...this.state.serverData, ...res.data.data],
-                                    loading: false,
-                                 });
-                       }
-                     )
-                     .catch((error)=>{
-                         this._hideAlert();
-                         alert('Err: '+JSON.stringify(error.response.data));
-                     });
-              }
+
+       getItems(headerss, url){
+//           if(!isEmpty){
+
+                var flag = false;
+                 if(this.state.offset == 0){
+                       this._showAlert();
+                       flag = true;
+
+                 }else{
+                      this.setState({loading:true})
+                 }
+
+                const{user_id, offset} = this.state;
+
+                axios.get(url, { headers:headerss})
+                .then((res)=>{
+                        if(res.data.success){
+                             this.setState({
+                                serverData: [...this.state.serverData, ...res.data.data],
+                                loading: false,
+    //                                    isEmpty:false,
+                             });
+                        }else{
+    //                              alert(JSON.stringify(res.data));
+                                this.setState({loading:false})
+                        }
+                        this._hideAlert();
+                        flag = false;
+                   }
+                 )
+                 .catch((error)=>{
+                     this._hideAlert();
+                     alert('Err: '+JSON.stringify(error.response.data));
+                 });
+//              }
+         }
 
 
         componentDidMount(){
-
-//             var aa = ServiceHeader(this.state.user_id, 0);
-//             alert(JSON.stringify(aa.headers)+",......\n "+JSON.stringify(aa.url));
-
-              this.getRegularOrderItemsFromServer()
+//                this.setState({isEmpty:false});
+              this.getRegularOrderItemsFromServer();
         }
+
 
         getRegularOrderItemsFromServer(){
-
-                       var aa = ServiceHeader(this.state.user_id, this.offset);
-                       this.getItems(aa.headers, aa.url);
+               var aa = ServiceHeader(this.state.user_id, this.state.offset, this.state.search_keyword);
+               this.getItems(aa.headers, aa.url);
         }
 
 
-        loadMoreData = () => {
-            this.setState({
-                fetching_from_server: true,
-            },
-            () => {
-                      var aa = ServiceHeader(this.state.user_id, this.offset);
-                      this.getItems(aa.headers, aa.url);
-            });
-        };
-
+//        loadMoreData = () => {
+//            this.setState({
+//                loading: true,
+//            },
+//            () => {
+//                      var aa = ServiceHeader(this.state.user_id, this.state.offset, this.state.search_keyword);
+//                      this.getItems(aa.headers, aa.url);
+//            });
+//        };
 
 
         renderFooter(){
-            return(
-
-                <View style={styles.footer}>
-                    <TouchableOpacity activeOpacity={0.9} onPress={this.loadMoreData} style={styles.loadMoreBtn}>
-                    <Text style={styles.btnText}>Load More</Text>
-                    {this.state.fetching_from_server ? (<ActivityIndicator color='black' style={{ marginLeft: 8}}/>) : null}
-                    </TouchableOpacity>
-                </View>
-            );
+           if (!this.state.loading) return null;
+           return (
+                 <View style={styles.flatListProgress}>
+                   <ActivityIndicator animating size="large" />
+                 </View>
+               );
         }
 
 
+        handleLoadMore = () => {
+            this.setState({
+                offset: this.state.offset + 1
+              },
+              () => {
+                 var aa = ServiceHeader(this.state.user_id, this.state.offset, this.state.search_keyword);
+                 this.getItems(aa.headers, aa.url);
+              }
+            );
+        };
+
+
+        clickSearch = () => {
+            this.setState({
+                offset: 0,
+                serverData:[],
+              },
+              () => {
+                 var aa = ServiceHeader(this.state.user_id, this.state.offset, this.state.search_keyword);
+                 this.getItems(aa.headers, aa.url);
+              }
+            );
+        };
+
+
+        iterateFlatListItem = ({ item, index}) => {
+            return(
+             <View style={styles.flatListItem}>
+                     <View style={{width:'30%', height:'100%'}}>
+                        <Image source={item.thumbnailurl?{uri:item.thumbnailurl}:
+                                require('../../assets/images/groceries.jpg')}
+                                 style={{width:80, height: 80, borderRadius:6}} />
+                     </View>
+                     <View style={{width:'70%', height:'100%'}}>
+                           <Text>  {item.displayname}</Text>
+                           <Text>  {item.baseprice}</Text>
+                           <Text>  {item.taxrate}</Text>
+                           <Text>  {item.count}</Text>
+
+                           <View style={{backgroundColor:'transparent', width:'100%', flexDirection:'row'}}>
+
+                            </View>
+                     </View>
+            </View>
+        );
+
+        };
 
 
         render(){
 
             return(
-                <View style={{flex: 1,
-                                     justifyContent: 'center',
-                                     alignItems:'center',
-                                     backgroundColor:'#fff'}}>
+                <View style={styles.regularOrderScreenParent}>
+                     <StatusBar backgroundColor= {T.YELLOW} barStyle="light-content"/>
+                      <View style={styles.searchSectionParent}>
+                           <View style={styles.searchSection}>
+                               <TextInput
+                                   style={styles.searchInputText}
+                                   placeholder="Search Product"
+                                   placeholderTextColor='#fff'
+                                   onChangeText={(searchString) => {this.setState({search_keyword:searchString})}}/>
+                               <Icon style={styles.searchIcon} name="search"
+                                     size={20} color="#fff"
+                                     onPress={()=>this.clickSearch()}/>
+                           </View>
+                      </View>
 
-                 <StatusBar backgroundColor= {T.YELLOW} barStyle="light-content"/>
+                    <View style={[{flex:3, width:'100%', backgroundColor:'#fff'}]}/>
+                    <View style={styles.flatListParent}>
+                        <FlatList style={styles.flatListSection}
+                            keyExtractor={(item, index) => index.toString()}
+                            data = {this.state.serverData}
+                            renderItem={this.iterateFlatListItem}
+                            ListFooterComponent={this.renderFooter.bind(this)}
+                            onEndReachedThreshold={1}
+                            onEndReached={this.handleLoadMore}/>
+                     </View>
 
-                 <View style={{backgroundColor:T.YELLOW, flex:1,  width:'100%', padding:15}}>
-                    <Item  >
-                    <Label style={{color:'#fff', fontSize:22}}>Search...</Label>
-                            <Input style={{marginBottom:5, color:'white'}}
-                                   value={''}
-                                   onChangeText={(text) => this.onPasswordChange(text)}
-
-                            />
-                          </Item>
-                 </View>
-
-                <View style={[styles.card_style, {flex:3, width:'100%', backgroundColor:'#fff'}]}>
-
-
-                        <FlatList style={{ flex:1,width:'90%', backgroundColor:'#fff', borderRadius:10,
-                        marginLeft:20, marginRight:20, marginTop:20}}
-
-                        keyExtractor={(item, index) => index}
-                        data = {this.state.serverData}
-                        renderItem={({ item, index}) => (
-                            <View style={{padding:1}}>
-                              <ListItem
-                                  title={item.values.displayname}
-                                  subtitle={item.values.baseprice}
-                                  leftAvatar={{ source: { uri: item.values.imageurl===''?
-                                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg':item.values.imageurl } }}
-                                />
-                            </View>
-                        )}
-                        ListFooterComponent={this.renderFooter.bind(this)}
-                        />
-
-                     <AwesomeAlert
-                          show={this.state.showAlert}
-                          showProgress={true}
-                          closeOnTouchOutside={false}
-                          closeOnHardwareBackPress={false}
-                        />
-
-                </View>
-
-
-
+                    <AwesomeAlert
+                        show={this.state.showAlert}
+                        showProgress={true}
+                        closeOnTouchOutside={false}
+                        closeOnHardwareBackPress={false}/>
                 </View>
 
             );
         }
 }
 
-//   <InputGroup style={{flex:1, color:'white', margin:10}} borderType="underline" >
-//                    <Icon name={'search'} size={27} color={'white'}/>
-//                    <Input placeholder="Search" style={{color:'#fff'}}/>
-//                </InputGroup>
 
+
+//              <View style={styles.footer}>
+//                    <TouchableOpacity activeOpacity={0.9} onPress={this.loadMoreData} style={styles.loadMoreBtn}>
+//                    <Text style={styles.btnText}>Load More</Text>
+//                    {this.state.loading ? (<ActivityIndicator color='black' style={{ marginLeft: 8}}/>) : null}
+//                    </TouchableOpacity>
+//                </View>
 

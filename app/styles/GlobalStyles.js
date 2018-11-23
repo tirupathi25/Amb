@@ -134,7 +134,6 @@ export default StyleSheet.create({
                 position: 'absolute',
                 top: 80,
                 left: 0,
-                backgroundColor: 'red'
               },
 
                box1: {
@@ -183,5 +182,131 @@ export default StyleSheet.create({
         height: 0.5,
         backgroundColor: 'rgba(0,0,0,0.4)'
     },
+
+
+
+    //Styles of Regular Order Items below
+    searchSectionParent:{
+        backgroundColor:T.YELLOW,
+        flex:1,
+        width:'100%',
+        padding:10
+    },
+    searchSection: {
+        width:'100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:T.YELLOW ,
+        borderBottomColor:'#fff',
+        borderBottomWidth:2,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 15,
+    },
+    searchIcon: {
+        padding: 10,
+        color:'#fff'
+    },
+    searchInputText: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 0,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        backgroundColor: T.YELLOW,
+        color: '#fff',
+        fontSize:25,
+        fontFamily:'Tittilium WebBold Italic',
+    },
+
+    flatListParent:{
+      position: 'absolute',
+      top: '20%',
+      left: '5%',
+      right:'5%',
+      width: '90%',
+      height: '80%',
+      borderRadius:6,
+      backgroundColor:T.YELLOW,
+      flex:3,
+    },
+    flatListSection:{
+        flex:1,
+        width:'100%',
+        backgroundColor:'#fff',
+        borderRadius:6
+    },
+    flatListItem:{
+        flex:1,
+        height:100,
+        flexDirection:'row',
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#fff',
+        borderRadius:6,
+    },
+    regularOrderScreenParent:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems:'center',
+        backgroundColor:'#fff'
+    },
+
+    flatListProgress:{
+      paddingVertical: 20,
+      borderTopWidth: 1,
+      borderColor: "#CED0CE"
+    },
+
+
+    // OrderEntryDetails View Styles
+  imgView:{
+      width: '100%',
+      height: 200,
+      marginTop: 44,
+  },
+  textStyle:{
+      fontSize:30,
+      fontFamily:'HelveticaNeue-Bold',
+      textAlign:'left',
+      color: 'white',
+      marginLeft: 16,
+      marginBottom: 15,
+  },
+  button1Style:{
+      marginTop: 23,
+      marginLeft: 15,
+  },
+  button2Style:{
+      marginLeft: 218,
+      marginTop: 20,
+      
+  },
+  borderLine:{
+      width : '100%',
+      height: 1,
+      backgroundColor:'gray',
+  },
+  addimagestyle:{
+       justifyContent: 'center',
+       alignItems: 'center',
+       marginLeft:10,
+       marginTop:13,
+        width: '28%',
+       height: 30,
+       backgroundColor: '#FDC21D',
+  },
+  minusimagestyle:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 15,
+      marginTop:13,
+      width: '28%',
+      height: 30,
+      backgroundColor: '#FDC21D',
+  }
 
 });

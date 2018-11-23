@@ -6,6 +6,7 @@ import LoginScreen from './app/screens/LoginScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import Dashboard from './app/screens/Dashboard';
 import RegularOrderScreen from './app/screens/RegularOrderScreen';
+import OrderEntryDetails from './app/screens/OrderEnteryDetails';
 //import HeaderTransparent from './react_app/HeaderTransparent';
 //import TabsHome from './react_app/TabsHome';
 
@@ -34,11 +35,21 @@ const mainNavigator = createStackNavigator({
         }
       },
 
-      Dashboard:{
-        screen:Dashboard,
-        //  navigationOptions:{
-        //             header:null,
-        //         }
+
+   
+       Dashboard:{
+          screen:Dashboard,
+           navigationOptions:{
+                      header:null,
+                  }
+        },
+
+
+      OrderEntryDetail:{
+                screen: OrderEntryDetails,
+                navigationOptions:{
+                  header: null,
+                }
       },
 
       RegularOrderScreen:{
@@ -46,8 +57,6 @@ const mainNavigator = createStackNavigator({
 
       }
 
-//
-//
 // TabsHome:{
 //            screen: TabsHome,
 //        },
