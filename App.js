@@ -11,12 +11,7 @@ import RegularOrderScreen from './app/screens/RegularOrderScreen';
 
 
 const mainNavigator = createStackNavigator({
-Dashboard:{
-        screen:Dashboard,
-         navigationOptions:{
-                    header:null,
-                }
-      },
+
 
     SelectLanguage :{
         screen: SelectLanguage,
@@ -39,7 +34,12 @@ Dashboard:{
         }
       },
 
-
+      Dashboard:{
+        screen:Dashboard,
+        //  navigationOptions:{
+        //             header:null,
+        //         }
+      },
 
       RegularOrderScreen:{
         screen:RegularOrderScreen,

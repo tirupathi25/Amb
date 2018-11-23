@@ -16,6 +16,7 @@ const Crypto = require('../../crypto');
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
 import AwesomeAlert from 'react-native-awesome-alerts';
+const IS_REMEMBERME = 'is_rememberme';
 
 export default class LoginScreen extends Component {
 
@@ -24,18 +25,56 @@ export default class LoginScreen extends Component {
         const {navigation} = props;
         this.state={
              checked:false,
-             email:'go.over3833hk@gmail.com',
-             password:'password',
+             email:'',
+             password:'',
              lang_id: navigation.state.params.lang_id,
              showAlert: false,
              email_error:'',
              pwd_error:'',
+             is_rememberme : false
         }
 //        this.goBack = this.goBack.bind(this);
 //go.over3833hk@gmail.com
 
     }
 
+
+    componentDidMount()
+    {
+        AsyncStorage.getItem(IS_REMEMBERME).then((value) => {
+                if( JSON.parse(value) )
+                {
+                    this.setState({checked : true})
+                    if(value == "true")
+                     {
+                            AsyncStorage.getItem("email").then((value) => {
+                            this.setState({email : value})
+                            }).done();
+
+                            AsyncStorage.getItem("password").then((value) => {
+                                this.setState({password : value})
+                                }).done();
+                     } 
+                }
+                else
+                {
+                    this.setState({checked : false})
+                }
+            }).done();
+    }
+
+    rememberMe()
+    {
+        if(this.state.checked == false)
+        {
+            this.setState({checked : true});
+       
+        }
+        else
+        {
+            this.setState({checked : false});
+        }
+    }
 
 //    goback = ()=> {
 //            const {navigation} = this.props;
@@ -57,12 +96,13 @@ export default class LoginScreen extends Component {
           };
 
 
-          modifyCheckUncheck = ()=> {
-              if(!this.state.checked)
-                  this.setState({checked:true})
-              else
-                  this.setState({checked:false})
-          };
+        //   modifyCheckUncheck = ()=>
+        //    {
+        //       if(!this.state.checked)
+        //           this.setState({checked:true})
+        //       else
+        //           this.setState({checked:false})
+        //   };
 
 
         validateLoginDetails = () => {
@@ -172,8 +212,10 @@ export default class LoginScreen extends Component {
                       AsyncStorage.setItem("isLoggedIn", JSON.stringify(true) );
 //                      AsyncStorage.setItem("LoginObject", "none");
                       AsyncStorage.setItem("email", USER.email);
+                      AsyncStorage.setItem("password", password);
                       AsyncStorage.setItem("user_id", USER.id);
-                       this.props.navigation.navigate('WelcomeScreen', {object:  USER } ) ;
+                      AsyncStorage.setItem(IS_REMEMBERME,JSON.stringify(this.state.checked)) ?  "true" : "false";
+                      this.props.navigation.navigate('WelcomeScreen', {object:  USER } ) ;
 
                   }
                   else{
@@ -225,7 +267,7 @@ ambika_login_logo
                               <Form>
                                   <Item floatingLabel >
                                     <Label style={{color:'white', fontSize:20}}>Enter Login ID</Label>
-                                    <Input style={{marginBottom:10, color:'white'}}
+                                    <Input autoCapitalize='none' style={{marginBottom:10, color:'white'}}
                                             value={this.state.email}
                                              onChangeText={(text) => this.setState({email:text})}/>
 
@@ -243,11 +285,15 @@ ambika_login_logo
                                   <Text style={{color:'red', marginLeft:15}}>{this.state.pwd_error}</Text>
                                </Form>
 
-                               <CheckBox
-                                 title='Remember Me'
+                               <CheckBox onPress={()=> this.rememberMe()}
+                                 title='Remember Me' 
+                                 checkedIcon='check-square-o'
+                                 uncheckedIcon='square-o'
                                  checked={this.state.checked}
+                                 uncheckedColor = 'white'
+                                 checkedColor = 'white'
                                  containerStyle={{backgroundColor:'transparent', borderColor:'transparent'}}
-                                 textStyle={{color:'white'}}
+                                 textStyle={{color:'white'}} 
                                />
 
                                  <TouchableHighlight style={[styles.button_enabled, {marginTop:10}]}

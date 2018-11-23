@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 //import { Container, Header, Left, Body, Right, Title } from 'native-base';
 import {View, StatusBar, Image, TouchableNativeFeedback, StyleSheet, TouchableHighlight,
  ImageBackground, Text, Button,
- ToastAndroid} from 'react-native';
+ ToastAndroid,Alert} from 'react-native';
 //import {Accordionm, Button, Text} from 'native-base';
 import styles from '../styles/GlobalStyles';
 import {ListItem, Left, Right} from 'native-base';
+import { NavigationActions,StackActions } from "react-navigation";
 
 const Constants = require('../styles/ColorConstants');
 const T = Constants.COLOR;
 
 import { strings, setLanguage } from '../utils/i18n';
+import Dashboard from './Dashboard';
 
-export default class WelcomeScreen extends Component {
-
-
+export default class WelcomeScreen extends Component 
+{
     constructor(props){
         super(props)
         this.state = {
@@ -34,10 +35,20 @@ export default class WelcomeScreen extends Component {
         }
    }
 
-   pressWelcome = (page)=>{
-        this.props.navigation.navigate('Dashboard');
+//    pressWelcome = (page)=>{
+//         this.props.navigation.navigate('Dashboard');
 
-   }
+//    }
+
+// Navigation Move to Dashboard
+ moveToDashboard()
+ {
+    const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Dashboard' })],
+    });
+    this.props.navigation.dispatch(resetAction);
+}
 
    changeName = data => {
         this.setState(data);
@@ -67,7 +78,7 @@ export default class WelcomeScreen extends Component {
 
                             <View style={{ flex:1}}>
                                 <Text style={{color:'white', textAlign:'center', fontSize:24,}}
-                                onPress={() => this.pressWelcome()}>{strings('welcome')}</Text>
+                                onPress={() => this.moveToDashboard()}>{strings('welcome')}</Text>
                             </View>
 
 
