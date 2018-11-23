@@ -183,9 +183,9 @@ export default StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.4)'
     },
 
+
+
     //Styles of Regular Order Items below
-
-
     searchSectionParent:{
         backgroundColor:T.YELLOW,
         flex:1,
@@ -256,10 +256,57 @@ export default StyleSheet.create({
     },
 
     flatListProgress:{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          borderColor: "#CED0CE"
-        },
+      paddingVertical: 20,
+      borderTopWidth: 1,
+      borderColor: "#CED0CE"
+    },
 
+
+    // OrderEntryDetails View Styles
+  imgView:{
+      width: '100%',
+      height: 200,
+      marginTop: 44,
+  },
+  textStyle:{
+      fontSize:30,
+      fontFamily:'HelveticaNeue-Bold',
+      textAlign:'left',
+      color: 'white',
+      marginLeft: 16,
+      marginBottom: 15,
+  },
+  button1Style:{
+      marginTop: 23,
+      marginLeft: 15,
+  },
+  button2Style:{
+      marginLeft: 218,
+      marginTop: 20,
+      
+  },
+  borderLine:{
+      width : '100%',
+      height: 1,
+      backgroundColor:'gray',
+  },
+  addimagestyle:{
+       justifyContent: 'center',
+       alignItems: 'center',
+       marginLeft:10,
+       marginTop:13,
+        width: '28%',
+       height: 30,
+       backgroundColor: '#FDC21D',
+  },
+  minusimagestyle:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 15,
+      marginTop:13,
+      width: '28%',
+      height: 30,
+      backgroundColor: '#FDC21D',
+  }
 
 });
