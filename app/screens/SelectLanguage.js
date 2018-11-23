@@ -64,42 +64,35 @@ export default class SelectLanguage extends Component {
 
 
                  <View style={{flex:1}}>
+                       <View style={{flex:4, alignItems:'center', justifyContent:'center'}}>
+                           <Image style={{width: 180, height:180}}
+                             source={require('../../assets/images/logo_round.png')}
+                           />
+                       </View>
 
 
-                           <View style={{flex:4, alignItems:'center', justifyContent:'center'}}>
-                               <Image style={{width: 180, height:180}}
-                                 source={require('../../assets/images/logo_round.png')}
-                               />
-                           </View>
+                        <View style={{ flex:1}}>
+                            <Text style={{color:'white', textAlign:'center', fontSize:24}}> Select Language</Text>
+                        </View>
 
+                       <View style={{ flex:4}}>
+                          <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(1, 'en')} underlayColor={T.TRANSPARENT}>
+                                   <Text style={[styles.inner_container, styles.customFont, { color:T.BLUE}]} >{strings('languages.english')}</Text>
+                          </TouchableHighlight>
 
-                            <View style={{ flex:1}}>
-                                <Text style={{color:'white', textAlign:'center', fontSize:24}}> Select Language</Text>
-                            </View>
+                          <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(2, 'hi')} underlayColor={T.TRANSPARENT}>
+                                 <Text style={[styles.inner_container, styles.customFont, {color:T.GREEN}]} >{strings('languages.hindi')}</Text>
+                         </TouchableHighlight>
 
-                           <View style={{ flex:4}}>
+                         <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(3, 'ja')} underlayColor={T.TRANSPARENT}>
+                                    <Text style={[styles.inner_container, styles.customFont, {color:T.RED}]} >{strings('languages.japanese')}</Text>
+                           </TouchableHighlight>
 
-                              <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(1, 'en')} underlayColor={T.TRANSPARENT}>
-                                       <Text style={[styles.inner_container, styles.customFont, { color:T.BLUE}]} >{strings('languages.english')}</Text>
-                              </TouchableHighlight>
-
-                              <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(2, 'hi')} underlayColor={T.TRANSPARENT}>
-                                     <Text style={[styles.inner_container, styles.customFont, {color:T.GREEN}]} >{strings('languages.hindi')}</Text>
-                             </TouchableHighlight>
-
-                             <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(3, 'ja')} underlayColor={T.TRANSPARENT}>
-                                        <Text style={[styles.inner_container, styles.customFont, {color:T.RED}]} >{strings('languages.japanese')}</Text>
-                               </TouchableHighlight>
-
-                               <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(4, 'ne')} underlayColor={T.TRANSPARENT}>
-                                      <Text style={[styles.inner_container, styles.customFont, {color:T.YELLOW}]} >{strings('languages.nepali')}</Text>
-                              </TouchableHighlight>
-
-                           </View>
-
-
-
-                    </View>
+                           <TouchableHighlight style={styles.button_style_transparent} onPress={() => this.SelectLangToGoToLoginScreen(4, 'ne')} underlayColor={T.TRANSPARENT}>
+                                  <Text style={[styles.inner_container, styles.customFont, {color:T.YELLOW}]} >{strings('languages.nepali')}</Text>
+                          </TouchableHighlight>
+                       </View>
+                 </View>
             </ImageBackground>
 
 

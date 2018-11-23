@@ -13,6 +13,7 @@ import styles from '../styles/GlobalStyles';
 import {Card, Avatar, Header, ButtonGroup, Divider, SocialIcon } from 'react-native-elements';
 
 import Icon from "../components/Icon";
+import LinerIcon from "../components/LinerIcon";
 
 const OAuth = require('oauth-1.0a');
 const Crypto = require('../../crypto');
@@ -164,7 +165,6 @@ logout = ()=>{
                 onPress={() => this.logout}
                 underlayColor={'#64b5f6'}
                 size={30}
-                style={{marginRight:5}}
               />
               <Text style={{  fontSize:16, color:'#fff', textAlign:'center' }} > {data.text_name} </Text>
         </TouchableOpacity>
@@ -180,8 +180,7 @@ logout = ()=>{
                      color='#fff'
                      onPress={() => this.logout}
                      underlayColor={'#64b5f6'}
-                     size={30}
-                     style={{marginRight:5}}
+                     size={32}
                    />
                    <Text style={{  fontSize:16, color:'#fff', textAlign:'center' }} > {data.text_name} </Text>
              </TouchableOpacity>
@@ -190,8 +189,6 @@ logout = ()=>{
 
 
   render() {
-
-
 
             const buttons = ['Mutsoko Suziki', 'Gold Member', 'Ambica'];
 
@@ -248,17 +245,16 @@ logout = ()=>{
                      style={{flex:1}}
                      renderItem={this._renderItem}
                      renderPlaceholder={this._renderPlaceholder}
-    //                 data={[{'color':'#E91D62'}, 'orange', 'red', 'green', 'blue', 'yellow', 'skyblue', 'grey']}
-                     data={[{'color':'#E91D62', 'icon_name':'cart', 'text_name':strings('regular_order.one')},
-                      {'color':'#9C2881', 'icon_name':'disc', 'text_name':strings('regular_order.two')},
-                       {'color':'#2196F3', 'icon_name':'document', 'text_name':strings('regular_order.three')},
-                     {'color':'#02BD14', 'icon_name':'alert', 'text_name':strings('regular_order.four')},
-                      {'color':'#FEC107', 'icon_name':'microphone', 'text_name':strings('regular_order.five')},
-                      {'color':'#9E9E9E', 'icon_name':'aperture', 'text_name':strings('regular_order.six')},
-                        {'color':'#1B4FA8', 'icon_name':'list-box', 'text_name':strings('regular_order.seven')},
-                         {'color':'#46E855', 'icon_name':'megaphone', 'text_name':strings('regular_order.eight')},
-                         {'color':'#F44337', 'icon_name':'alarm', 'text_name':strings('regular_order.nine')}]}
                      itemsPerRow={2}
+                       data={[{'color':'#E91D62', 'icon_name':'cart', 'text_name':strings('regular_order.one')},
+                          {'color':'#9C2881', 'icon_name':'disc', 'text_name':strings('regular_order.two')},
+                           {'color':'#2196F3', 'icon_name':'document', 'text_name':strings('regular_order.three')},
+                         {'color':'#02BD14', 'icon_name':'alert', 'text_name':strings('regular_order.four')},
+                          {'color':'#FEC107', 'icon_name':'microphone', 'text_name':strings('regular_order.five')},
+                          {'color':'#9E9E9E', 'icon_name':'aperture', 'text_name':strings('regular_order.six')},
+                            {'color':'#1B4FA8', 'icon_name':'list-box', 'text_name':strings('regular_order.seven')},
+                             {'color':'#46E855', 'icon_name':'megaphone', 'text_name':strings('regular_order.eight')},
+                             {'color':'#F44337', 'icon_name':'alarm', 'text_name':strings('regular_order.nine')}]}
                    />
 
                     <View style={{marginTop:10}}>
@@ -308,4 +304,13 @@ logout = ()=>{
 
 
 
-
+//
+//                       data={[{'color':'#E91D62', 'icon_name':'cart', 'text_name':strings('regular_order.one')},
+//                      {'color':'#9C2881', 'icon_name':'disc', 'text_name':strings('regular_order.two')},
+//                       {'color':'#2196F3', 'icon_name':'document', 'text_name':strings('regular_order.three')},
+//                     {'color':'#02BD14', 'icon_name':'alert', 'text_name':strings('regular_order.four')},
+//                      {'color':'#FEC107', 'icon_name':'microphone', 'text_name':strings('regular_order.five')},
+//                      {'color':'#9E9E9E', 'icon_name':'aperture', 'text_name':strings('regular_order.six')},
+//                        {'color':'#1B4FA8', 'icon_name':'list-box', 'text_name':strings('regular_order.seven')},
+//                         {'color':'#46E855', 'icon_name':'megaphone', 'text_name':strings('regular_order.eight')},
+//                         {'color':'#F44337', 'icon_name':'alarm', 'text_name':strings('regular_order.nine')}]}
